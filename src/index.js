@@ -40,7 +40,7 @@ function formatDate(date) {
 }
 
 function searchCity(city) {
-  let apiKey = "tf940677c30558f1o1b34a5a883a44b6";
+  let apiKey = "b2a5adcct04b33178913oc335f405433";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
   axios.get(apiUrl).then(refreshWeather);
 }
@@ -52,7 +52,33 @@ function handleSearchSubmit(event) {
   searchCity(searchInput.value);
 }
 
+function displayForecast() {
+  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+  let forecastHtml = "";
+
+  days.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `
+      <div class="weather-forecast-day">
+        <div class="weather-forecast-date">${day}</div>
+        <div class="weather-forecast-icon">🌤️</div>
+        <div class="weather-forecast-temperatures">
+          <div class="weather-forecast-temperature">
+            <strong>15º</strong>
+          </div>
+          <div class="weather-forecast-temperature">9º</div>
+        </div>
+      </div>
+    `;
+  });
+
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHtml;
+}
+
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Rio de Janeiro");
+displayForecast();
